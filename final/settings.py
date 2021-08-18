@@ -19,8 +19,8 @@ from django.contrib.messages import constants as messages
 
 # security options suggested by manage.py check --deploy HTTPS settings
 
-# CSRF_COOKIE_SECURE = True
-# SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 
 MESSAGE_TAGS = {
