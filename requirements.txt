@@ -13,6 +13,7 @@ decorator==5.0.7
 Django==3.1.7
 django-bleach==0.7.0
 django-crispy-forms==1.12.0
+django-environ==0.4.5
 django-js-asset==1.2.2
 django-messages==0.6.0
 django-mptt==0.12.0
@@ -59,3 +60,4 @@ traitlets==5.0.5
 urllib3==1.26.4
 wcwidth==0.2.5
 webencodings==0.5.1
+whitenoise==5.3.0
