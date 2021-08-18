@@ -746,16 +746,16 @@ a:active .menu {
   "menu search"
   "treeview treeview";
 
-  background: rgb(240, 160, 0); /* Old browsers */
-	background: -moz-linear-gradient(top,  rgba(25,240,0,1) 0%, rgba(255,255,255,1) 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(247, 230, 194)), color-stop(100%,rgb(255, 200, 0))); /* Chrome,Safari4+ */
+  /* background: rgb(240, 160, 0); 
+	background: -moz-linear-gradient(top,  rgba(25,240,0,1) 0%, rgba(255,255,255,1) 100%); 
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(247, 230, 194)), color-stop(100%,rgb(255, 200, 0))); 
 	background: -webkit-linear-gradient(left top, 
   rgb(255, 108, 3) 0%, 
   rgb(231, 220, 15) 10%, 
   rgb(255, 255, 160) 30%,
-  rgb(145, 145, 145) 100%
+  rgb(145, 145, 145) 100% */
   
-  
+  background-color: white;
   
   ); /* Chrome10+,Safari5.1+ */
 	/* background: -o-linear-gradient(top,  rgba(25,240,0,1) 0%,rgba(255,255,255,1) 100%); /* Opera 11.10+ */
