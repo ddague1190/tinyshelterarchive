@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% load custom_tags %} 
+
+
+
+{% block header %} 
+
+Garage
+
+{% endblock header %} 
+
+
+
+{% block content %}
+
+<div class="content">
+    <h5 class='text-muted'>Vehicles</h5>   
+
+
+    {% if user.is_authenticated and user.username == garage_owner %}
+    <div span='in-block'>
+      
+        <a style='font-size:1em' href="{% url 'website:addvehicle' %}">Add a vehicle</a>
+    </div>
+    {% endif %}
+    
+    <div class="garage-flex">
+
+        {% if not vehicle_list %}
+
+        Nothing here yet
+    
+        {% endif %}
+
+
+    {% for ride in vehicle_list %} 
+    
+   
+
+
+        <div class='search-results'>
+            <div class='search-results-child'>
+            <span><b>Vehicle name:</b></span>
+            <p class='indent' > <a href="{% url 'website:vehicle' ride.slug %}">{{ride.name}}</a></p>
+            <span><b>Vehicle base:</b></span>
+            <p class='indent' >{{ride.project_base}}</p>
+            <span><b>Predominant build technique:</b></span>
+            <p class='indent'>{{ride.build_techniques}}</p>
+            <span><b>Builder profile: </b></span>
+            <a href="{% url 'website:profile' ride.owner %}">{{ride.owner}}</a>
+            <br>
+            <br>
+            <span>
+
+                <button type="button" onclick=vehlike({{ride.pk}}) class="btn btn-default like" aria-label="Left Align">
+                    <i class="fas fa-thumbs-up"></i>
+                </button>
+                <span class="mt-2" id="{{ride.pk}}"> {{like_ref|get_item:ride.pk}}</span>          
+                <span class='small ml-0' id={{ride.pk}}-label></span>
+
+
+            </span>
+        
+            </div>
+        
+            <div class='search-results-child'>
+                <span><b>Description:</b></span>
+                <p style='overflow-wrap: break-word;' class='indent'>{{ride.vehicle_description |safe}}</p>
+            
+            
+            <a href="{% url 'website:vehicle' ride.slug %}">Go to build page</a>
+            <br>
+
+            {% if user == ride.owner %}
+            <a href="{% url 'website:furnish' ride.slug %}">Add furniture to your vehicle</a>
+            <br>
+            <a  href="{% url 'website:editvehicle' ride.slug %}">   Edit your vehicle</a>
+            <br>
+            <a href="{% url 'website:deletevehicle' ride.slug %}">   Delete your vehicle</a>
+            
+            {% endif %}
+            
+            </div>
+            
+
+
+            <div class='search-results-child garage-pic-section'>
+                <div class="search-results-child-pictures">
+                    <span sytle='font-size:10px'>Exterior pictures</span>
+                    {% for image in ride.images.all %} 
+                    {% if forloop.first %}                
+                    <a href="{{image.image.url}}" data-toggle="lightbox" data-gallery="{{ride}}" class="lightboximg" data-footer="{{image.annotation}}">
+                    <img src="{{image.image.url}}" class="img-fluid">
+                    </a>
+                    {% else %}
+                    <div data-toggle="lightbox" data-gallery="{{ride}}" data-remote="{{image.image.url}}" data-footer="{{image.annotation}}"></div>
+
+                    {% endif %}
+
+                     {% endfor %}
+                </div>
+
+                <div class="search-results-child-pictures">
+                    <span sytle='font-size:10px'>Interior pictures</span>
+                    {% for image in furniture_image_list|get_images:ride.pk %} 
+
+                    {% if not image %}
+                    Nothing built in here yet
+                    {% endif %}
+
+                    {% if forloop.first %}                
+                    <a href="{{image.image.url}}" data-toggle="lightbox" data-gallery="{{ride}}-interior" class="lightboximg" data-footer="{{image.annotation}}">
+                    <img src="{{image.image.url}}" class="img-fluid">
+                    </a>
+                    {% else %}
+                    <div data-toggle="lightbox" data-gallery="{{ride}}-interior" data-remote="{{image.image.url}}" data-footer="{{image.annotation}}"></div>
+
+                    {% endif %}
+
+                     {% endfor %}
+                </div>
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+        
+        
+        
+
+
+     
+                
+  {% endfor %}
+
+</div>
+</div>
+
+
+{% endblock content %}

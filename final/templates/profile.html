@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<article class="content">
+    <h4 class="text-muted" style='display:inline-block;'>Profile page: {{object.username}}</h4>
+    
+            {% if user.username == object.username %} 
+            
+            <a href="{% url 'website:editprofile' user.username %}" role="button" class="nav-font">Edit profile</a>
+
+            {% endif %}
+<div class='profile-flex'>
+<div>
+ 
+            <div class="nav-font mx-2 ml-1 mt-1">
+                <ul style="list-style-type: None;">
+                    <li>
+                        <a href="{% url 'website:garage' object.username %}" role="button" class="btn btn-outline-secondary btn-sm">View their projects</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'website:furniturebybuilder' object.username %}" class="btn btn-outline-primary btn-sm">See their furniture</a>
+                    </li>
+
+
+                    {% if user.username != object.username %} 
+
+
+                    <li>
+                        <button class="btn btn-outline-secondary btn-sm" onclick=messenger()>Send them an in-app message</button>
+                    </li>
+                    
+                    {% endif %} 
+
+
+                </ul>
+
+                <div id="messenger_div" style="display:none">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <button class="btn btn-primary" type="submit">Send email</button>
+                      </form>
+                </div>
+               
+            </div>
+            <hr>
+           <div>
+                <b>Biography:</b>
+            </div>
+          
+            <div style='margin-left:1em;' >
+                {{object.profile.bio|safe}}
+            </div>
+            <hr>
+            <div >
+                <b>Location: </b><span> {{object.profile.location|default_if_none:"Nothing added here"}}</span>
+            </div>
+            <div >
+               
+            </div>
+            <div >
+                <b>Website: </b><span> {{object.profile.website|default_if_none:"Nothing added here" }}</span>
+            </div>
+         
+    </div>
+    <div class='profile-img'>
+        <img src="{{object.profile.profile_pic.url}}" alt="{{user}}">
+    </div>
+</div>
+
+{% if user.username == object.username %} 
+
+
+<div class="card" >
+    <div class="card-header">Messages Recieved<br><span style="font-size: x-small"> Note: messages older than 30 days are deleted</span></div>
+    <div class="card-body">
+        
+        <table class="nav-font table table-bordered table-sm table-hover">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Sender</th>
+                <th scope="col">Subject</th>
+                <th scope="col">Message</th>
+                <th scope="col">Time</th>
+                <th scope="col">Delete</th>
+
+              </tr>
+            </thead>
+            <tbody>
+            {% for message in recieved_emails %}
+              <tr id={{message.id}}>
+                <td>{{message.sender}}</td>
+                <td>{{message.subject}}</td>
+                <td>{{message.message}}</td>
+                <td>{{message.sent_at|date:'m-d-Y H:i'}}</td>
+                <td>
+
+                    <button type="button" onclick=confirmdelete({{message.id}})>
+                            
+                        <span id='{{message.id}}-delete'>Delete</span>
+
+                        <button style="display:none" type="button" id='{{message.id}}-confirm' onclick=deletemessage({{message.id}})>Confirm</button>
+
+                    
+                    </button>
+
+                </td>
+
+              </tr>
+              {% endfor %}
+
+            </tbody>
+          </table>
+    </div>
+    <div class="card"  >
+        <div class="card-header">Messages Sent<br><span style="font-size: x-small"> Note: messages older than 30 days are deleted</span></div>
+        <div class=" card-body" style="width:100%">
+            
+            <table class=" nav-font table table-bordered table-sm table-hover ">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Recipient</th>
+                    <th scope="col">Subject</th>
+                    <th scope="col">Message</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Delete</th>
+    
+                  </tr>
+                </thead>
+                <tbody>
+                {% for message in sent_emails %}
+                  <tr id={{message.id}}>
+                    <td>{{message.recipient}}</td>
+                    <td>{{message.subject}}</td>
+                    <td>{{message.message}}</td>
+                    <td>{{message.sent_at|date:'m-d-Y H:i'}}</td>
+                    <td>
+                        
+                        <button type="button" onclick=confirmdelete({{message.id}})>
+                            
+                            <span id='{{message.id}}-delete'>Delete</span>
+
+                            <button style="display:none" type="button" id='{{message.id}}-confirm' onclick=deletemessage({{message.id}})>Confirm</button>
+
+                        
+                        </button>
+                            
+                        
+                    </td>
+    
+    
+                  </tr>
+                  {% endfor %}
+    
+                </tbody>
+              </table>
+        </div>
+
+</div>
+
+
+
+
+
+</article>
+{% endif %} 
+
+
+
+
+
+{% endblock content %}

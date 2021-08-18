@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+{% load crispy_forms_tags %} 
+
+    <div class="content">
+    <h5>Register</h5>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ user_form |crispy }}
+        {{ profile_form |crispy }}
+
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+    <p class="text-center">If you already have an account, <a href="login">login</a> instead.</p>
+   
+
+    <span class='border'><em>Message from the website creator: this site will never share your personal email with anyone. The other profile fields will however be displayed on your profile page. Stick around - I do believe we are going to make this site great!</em></span>
+</div>
+{% endblock content %}

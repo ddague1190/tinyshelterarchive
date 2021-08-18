@@ -1,0 +1,415 @@
+{% extends 'base.html' %}
+
+{% load custom_tags %} 
+
+
+
+{% block content %}
+<div class="content">
+
+    <h6 class='text-muted'>Furniture by functionality</h6>
+
+
+    {% regroup furniture_list by functionality as f_list %} 
+
+    {% for furniture in f_list %} 
+
+
+
+        {% if furniture.grouper == "Kitchen" %}
+
+        <h4 class="">{{furniture.grouper}}</h4>
+
+       
+     
+            {% for item in furniture.list %} 
+          
+            <div class='furniture-item'>
+
+            
+            <div class='furniture-stats'>
+                <span class='text-muted'>Furniture Item #{{item.id}} </span>
+              
+                    {% if user == item.builder %} 
+                 
+                        <a class="small" href="{% url 'website:editfurniture' item.id %}">Edit</a> 
+                        <a class="small" href="{% url 'website:deletefurniture' item.pk %}">Delete</a>
+                             
+                    
+                    {% endif %} 
+                    <br> 
+                    <span>Parent project: </span><a href="{% url 'website:vehicle' item.vehicle.slug %}">{{ item.vehicle.name}}</a>
+                    <br>
+                    <span>Builder: <a href="{% url 'website:profile' item.builder%}">{{item.builder}}</a></span>
+                    <br>
+                         
+                            
+                            <button type="button" onclick=like({{item.pk}}) class="btn btn-default like" aria-label="Left Align">
+                            <i class="fas fa-thumbs-up"></i>
+                            </button>
+                            <span class="mt-2" id="{{item.pk}}"> {{like_ref|get_item:item.pk}}</span>
+                   
+                        <span class='small ml-0' id={{item.pk}}-label></span>
+
+                        <div>
+
+                            {% for image in item.images.all %} 
+                            {% if forloop.first %}
+                            <a href="{{image.image.url}}" data-toggle="lightbox" data-gallery="{{item}}" class="" data-footer="{{image.annotation}}">
+                                <span>Pop-up slideshow (all images)</span>
+                            </a>
+                            {% else %}
+                            <div data-toggle="lightbox" data-gallery="{{item}}" data-remote="{{image.image.url}}" data-footer="{{image.annotation}}"></div>
+            
+                            {% endif %}
+            
+                            {% endfor %}
+            
+                        </div>    
+                        <p class='text-muted'>First few images showing here:</p>
+                        
+                </div>
+
+
+                {% for image in item.images.all|first_five %} 
+                <div class='furniture-pic-container'> <img class='furniture-pic' src="{{image.image.url}}"></div>
+                {% endfor %}
+
+                </div>                  
+        
+            
+            {% endfor %}
+     
+
+
+        {% elif furniture.grouper == 'Bathroom' %}
+        <h4 class="">{{furniture.grouper}}</h4>
+
+       
+     
+        {% for item in furniture.list %} 
+      
+        <div class='furniture-item'>
+
+        
+        <div class='furniture-stats'>
+            <span class='text-muted'>Furniture Item #{{item.id}} </span>
+          
+                {% if user == item.builder %} 
+             
+                    <a class="small" href="{% url 'website:editfurniture' item.id %}">Edit</a> 
+                    <a class="small" href="{% url 'website:deletefurniture' item.pk %}">Delete</a>
+                         
+                
+                {% endif %} 
+                <br> 
+                <span>Parent project: </span><a href="{% url 'website:vehicle' item.vehicle.slug %}">{{ item.vehicle.name}}</a>
+                <br>
+                <span>Builder: <a href="{% url 'website:profile' item.builder%}">{{item.builder}}</a></span>
+                <br>
+                     
+                        
+                        <button type="button" onclick=like({{item.pk}}) class="btn btn-default like" aria-label="Left Align">
+                        <i class="fas fa-thumbs-up"></i>
+                        </button>
+                        <span class="mt-2" id="{{item.pk}}"> {{like_ref|get_item:item.pk}}</span>
+               
+                    <div class='small ml-0' id={{item.pk}}-label></div>
+
+                    <div>
+
+                        {% for image in item.images.all %} 
+                        {% if forloop.first %}
+                        <a href="{{image.image.url}}" data-toggle="lightbox" data-gallery="{{item}}" class="" data-footer="{{image.annotation}}">
+                           <span>Pop-up slideshow</span>
+                        </a>
+                        {% else %}
+                        <div data-toggle="lightbox" data-gallery="{{item}}" data-remote="{{image.image.url}}" data-footer="{{image.annotation}}"></div>
+        
+                        {% endif %}
+        
+                        {% endfor %}
+        
+                    </div>    
+                    
+            </div>
+
+
+            {% for image in item.images.all %} 
+            <div class='furniture-pic-container'> <img class='furniture-pic' src="{{image.image.url}}"></div>
+            {% endfor %}
+
+            </div>                  
+    
+        
+        {% endfor %}
+ 
+
+            
+        {% elif furniture.grouper == "Bedroom" %}
+        <h4 class="">{{furniture.grouper}}</h4>
+
+       
+     
+        {% for item in furniture.list %} 
+      
+        <div class='furniture-item'>
+
+        
+        <div class='furniture-stats'>
+            <span class='text-muted'>Furniture Item #{{item.id}} </span>
+          
+                {% if user == item.builder %} 
+             
+                    <a class="small" href="{% url 'website:editfurniture' item.id %}">Edit</a> 
+                    <a class="small" href="{% url 'website:deletefurniture' item.pk %}">Delete</a>
+                         
+                
+                {% endif %} 
+                <br> 
+                <span>Parent project: </span><a href="{% url 'website:vehicle' item.vehicle.slug %}">{{ item.vehicle.name}}</a>
+                <br>
+                <span>Builder: <a href="{% url 'website:profile' item.builder%}">{{item.builder}}</a></span>
+                <br>
+                     
+                        
+                        <button type="button" onclick=like({{item.pk}}) class="btn btn-default like" aria-label="Left Align">
+                        <i class="fas fa-thumbs-up"></i>
+                        </button>
+                        <span class="mt-2" id="{{item.pk}}"> {{like_ref|get_item:item.pk}}</span>
+               
+                    <div class='small ml-0' id={{item.pk}}-label></div>
+
+                    <div>
+
+                        {% for image in item.images.all %} 
+                        {% if forloop.first %}
+                        <a href="{{image.image.url}}" data-toggle="lightbox" data-gallery="{{item}}" class="" data-footer="{{image.annotation}}">
+                           <span>Pop-up slideshow</span>
+                        </a>
+                        {% else %}
+                        <div data-toggle="lightbox" data-gallery="{{item}}" data-remote="{{image.image.url}}" data-footer="{{image.annotation}}"></div>
+        
+                        {% endif %}
+        
+                        {% endfor %}
+        
+                    </div>    
+                    
+            </div>
+
+
+            {% for image in item.images.all %} 
+            <div class='furniture-pic-container'> <img class='furniture-pic' src="{{image.image.url}}"></div>
+            {% endfor %}
+
+            </div>                  
+    
+        
+        {% endfor %}
+ 
+
+        {% elif furniture.grouper == "Garage" %}
+        <h4 class="">{{furniture.grouper}}</h4>
+
+       
+     
+        {% for item in furniture.list %} 
+      
+        <div class='furniture-item'>
+
+        
+        <div class='furniture-stats'>
+            <span class='text-muted'>Furniture Item #{{item.id}} </span>
+          
+                {% if user == item.builder %} 
+             
+                    <a class="small" href="{% url 'website:editfurniture' item.id %}">Edit</a> 
+                    <a class="small" href="{% url 'website:deletefurniture' item.pk %}">Delete</a>
+                         
+                
+                {% endif %} 
+                <br> 
+                <span>Parent project: </span><a href="{% url 'website:vehicle' item.vehicle.slug %}">{{ item.vehicle.name}}</a>
+                <br>
+                <span>Builder: <a href="{% url 'website:profile' item.builder%}">{{item.builder}}</a></span>
+                <br>
+                     
+                        
+                        <button type="button" onclick=like({{item.pk}}) class="btn btn-default like" aria-label="Left Align">
+                        <i class="fas fa-thumbs-up"></i>
+                        </button>
+                        <span class="mt-2" id="{{item.pk}}"> {{like_ref|get_item:item.pk}}</span>
+               
+                    <div class='small ml-0' id={{item.pk}}-label></div>
+
+                    <div>
+
+                        {% for image in item.images.all %} 
+                        {% if forloop.first %}
+                        <a href="{{image.image.url}}" data-toggle="lightbox" data-gallery="{{item}}" class="" data-footer="{{image.annotation}}">
+                           <span>Pop-up slideshow</span>
+                        </a>
+                        {% else %}
+                        <div data-toggle="lightbox" data-gallery="{{item}}" data-remote="{{image.image.url}}" data-footer="{{image.annotation}}"></div>
+        
+                        {% endif %}
+        
+                        {% endfor %}
+        
+                    </div>    
+                    
+            </div>
+
+
+            {% for image in item.images.all %} 
+            <div class='furniture-pic-container'> <img class='furniture-pic' src="{{image.image.url}}"></div>
+            {% endfor %}
+
+            </div>                  
+    
+        
+        {% endfor %}
+ 
+
+
+        {% elif furniture.grouper == "Workspace" %}
+
+        <h4 class="">{{furniture.grouper}}</h4>
+
+       
+     
+        {% for item in furniture.list %} 
+      
+        <div class='furniture-item'>
+
+        
+        <div class='furniture-stats'>
+            <span class='text-muted'>Furniture Item #{{item.id}} </span>
+          
+                {% if user == item.builder %} 
+             
+                    <a class="small" href="{% url 'website:editfurniture' item.id %}">Edit</a> 
+                    <a class="small" href="{% url 'website:deletefurniture' item.pk %}">Delete</a>
+                         
+                
+                {% endif %} 
+                <br> 
+                <span>Parent project: </span><a href="{% url 'website:vehicle' item.vehicle.slug %}">{{ item.vehicle.name}}</a>
+                <br>
+                <span>Builder: <a href="{% url 'website:profile' item.builder%}">{{item.builder}}</a></span>
+                <br>
+                     
+                        
+                        <button type="button" onclick=like({{item.pk}}) class="btn btn-default like" aria-label="Left Align">
+                        <i class="fas fa-thumbs-up"></i>
+                        </button>
+                        <span class="mt-2" id="{{item.pk}}"> {{like_ref|get_item:item.pk}}</span>
+               
+                    <div class='small ml-0' id={{item.pk}}-label></div>
+
+                    <div>
+
+                        {% for image in item.images.all %} 
+                        {% if forloop.first %}
+                        <a href="{{image.image.url}}" data-toggle="lightbox" data-gallery="{{item}}" class="" data-footer="{{image.annotation}}">
+                           <span>Pop-up slideshow</span>
+                        </a>
+                        {% else %}
+                        <div data-toggle="lightbox" data-gallery="{{item}}" data-remote="{{image.image.url}}" data-footer="{{image.annotation}}"></div>
+        
+                        {% endif %}
+        
+                        {% endfor %}
+        
+                    </div>    
+                    
+            </div>
+
+
+            {% for image in item.images.all %} 
+            <div class='furniture-pic-container'> <img class='furniture-pic' src="{{image.image.url}}"></div>
+            {% endfor %}
+
+            </div>                  
+    
+        
+        {% endfor %}
+ 
+         
+        {% else %}
+
+        
+        <h4 class="">{{furniture.grouper}}</h4>
+
+       
+     
+        {% for item in furniture.list %} 
+      
+        <div class='furniture-item'>
+
+        
+        <div class='furniture-stats'>
+            <span class='text-muted'>Furniture Item #{{item.id}} </span>
+          
+                {% if user == item.builder %} 
+             
+                    <a class="small" href="{% url 'website:editfurniture' item.id %}">Edit</a> 
+                    <a class="small" href="{% url 'website:deletefurniture' item.pk %}">Delete</a>
+                         
+                
+                {% endif %} 
+                <br> 
+                <span>Parent project: </span><a href="{% url 'website:vehicle' item.vehicle.slug %}">{{ item.vehicle.name}}</a>
+                <br>
+                <span>Builder: <a href="{% url 'website:profile' item.builder%}">{{item.builder}}</a></span>
+                <br>
+                     
+                        
+                        <button type="button" onclick=like({{item.pk}}) class="btn btn-default like" aria-label="Left Align">
+                        <i class="fas fa-thumbs-up"></i>
+                        </button>
+                        <span class="mt-2" id="{{item.pk}}"> {{like_ref|get_item:item.pk}}</span>
+               
+                        <span class='small ml-0' id={{item.pk}}-label></span>
+
+                    <div>
+
+                        {% for image in item.images.all %} 
+                        {% if forloop.first %}
+                        <a href="{{image.image.url}}" data-toggle="lightbox" data-gallery="{{item}}" class="lightboximg" data-footer="{{image.annotation}}">
+                           <span>Pop-up slideshow</span>
+                        </a>
+                        {% else %}
+                        <div data-toggle="lightbox" data-gallery="{{item}}" data-remote="{{image.image.url}}" data-footer="{{image.annotation}}"></div>
+        
+                        {% endif %}
+        
+                        {% endfor %}
+        
+                    </div>    
+                    
+            </div>
+
+
+            {% for image in item.images.all %} 
+            <div class='furniture-pic-container'> <img class='furniture-pic' src="{{image.image.url}}"></div>
+            {% endfor %}
+
+            </div>                  
+    
+        
+        {% endfor %}
+ 
+
+            
+
+
+        {% endif %}
+
+            
+{% endfor %}
+
+</div>
+{% endblock content %}
+

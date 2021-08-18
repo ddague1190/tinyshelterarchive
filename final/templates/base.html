@@ -1,0 +1,341 @@
+
+{% load static %}
+{% load widget_tweaks %}
+{% load mptt_tags %}
+{% load custom_tags %} 
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>
+    {% block title %} 
+    {{ value|default_if_none:"Tiny Shelter Archive" }}  
+    {% endblock title %}
+    
+  </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- This is ekko-lightbox -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" crossorigin="anonymous">
+
+<!-- End of This is ekko-lightbox -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+<link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+<link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+<link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+<link href="https://fonts.googleapis.com/css2?family=Georama:wght@100;400&display=swap" rel="stylesheet">
+
+  <!--Font awesome -->
+
+  <script src="https://kit.fontawesome.com/468be3d841.js" crossorigin="anonymous"></script>
+
+    <!--End of Font awesome   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+-->
+
+
+  <link rel="stylesheet"href="{% static 'main.css' %}" type="text/css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src = "https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js" crossorigin="anonymous"></script>
+
+
+  <script src="/static/main.js" crossorigin="anonymous"></script>
+
+
+<!--This is django-dynamic-formset plugin (see credit in enclosing)-->
+
+  <script src="/static/jquery.formset.js" crossorigin="anonymous"></script>
+
+  <!--End of This is django-dynamic-formset plugin (see credit in enclosing)-->
+
+</head>
+<link rel="stylesheet"href="/static/main.css">
+
+<body>
+
+  <div class='wrapper'> 
+
+  
+
+
+
+
+
+
+
+
+<aside class='side'>
+
+
+
+ 
+
+  {% if messages %}
+  {% for message in messages %}
+  
+    <div class="message alert {{ message.tags }} alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      {{ message }}
+    </div>
+  
+  {% endfor %}
+  {% endif %} 
+
+
+
+<button class='hideSidebar'><i class="fa fa-minus-square-o" aria-hidden="true"></i></button>
+   
+<button class='hideSidebar' style='display:none;'><i class="far fa-plus-square"></i></button>
+
+
+
+
+    <div id='menu'>
+      <br>
+
+        <div id='logo'>
+        <a style='text-decoration: none;color:rgb(227, 69, 69)' href="{% url 'website:index' %}"><h3 style='font-family:Major Mono Display'>Tiny Shelter Archive</h3></a>
+      </div>
+      <ul>
+        {% if user.is_authenticated %}
+     
+        
+          <li>
+                <a href="{% url 'website:garage' user.username %}">Your garage</a>
+              </li>
+              <li>
+                <a href="{% url 'website:profile' user %}">Your profile</a>
+
+              </li>
+              <li>
+                                <a href="{% url 'website:logout' %}"></span> Logout?</a>
+
+              </li>
+        {% else %}
+        <li>
+                <a href="{% url 'website:login' %}">Login</a>
+              </li>
+        {% endif %}
+      </ul>
+        </div>
+      
+
+    <div id='search'>
+
+      <div>
+        <h4>VEHICLE SEARCH</h4>
+      <form action="{% url 'website:searchvehicles' %}" method="get">
+        <select name="type" id="vehicle_type">
+          <option value="none">select vehicle type...</option>
+          <option value="car">Car</option>
+          <option value="automobile">Automobile</option>
+          <option value="van">Van</option>
+          <option value="trailer">Trailer</option>
+        </select>
+        <select name="technique" id="build_technique">
+          <option value="none">select build technique...</option>
+          <option value="aluminum">Aluminum extrusions</option>
+          <option value="welding">Welding</option>
+          <option value="carpentry">Carpentry</option>
+          <option value="fiberglass">Fiberglass</option>
+          <option value="CNC">CNC</option>
+          <option value="foam">Foam</option>
+        </select>
+        <br>
+  
+        <input style='border-radius:0.25em;margin-bottom: 0.25em;' name="q" type="text" placeholder="searches all fields...">
+  <br>
+        <input type="submit" value="Search">
+      </form>
+    </div>
+  
+  <br>
+      
+      <div>
+        <h4>FURNITURE SEARCH</h4>
+  
+        <select name='type' id="function_selection">
+          <option value="none">select furniture function...</option>
+          <option value="Kitchen">Kitchen</option>
+          <option value="Bathroom">Bathroom</option>
+          <option value="Bedroom">Bedroom</option>
+          <option value="Garage">Garage</option>
+          <option value="Workspace">Workspace</option>
+          <option value="Utilities">Utilities</option>
+        </select>
+  
+  
+  
+    </div>
+  
+  
+  
+      </div>
+
+<br>
+
+
+    
+    <div id='treeview'>
+
+      <h4 id="tree-title"> ENTIRE COLLECTION</h4> 
+      <button class='dropdown-tree'><img src="/static/down.png" class="dropdown-img-tree"></button>
+
+
+
+    
+    <ul class="myUL">
+        {% if projects %}
+        {% recursetree projects %}
+        {% if node.level == 0 %}
+    
+        {% if not node.is_leaf_node %}
+        <li><span class='caret'>{{ node.name }}</span>
+      
+        {% else %}  
+    
+        <li>{{ node.name }}
+        {% endif %}
+    
+        {% else %}
+          {% if not node.is_leaf_node %}
+        <li><span class="caret">{{ node.name }}</span>
+          {% else %}
+        
+          {% if node.tree_linked %}
+    
+        <li><a class="tree-link" id="{{ node.name }}" href="{% url 'website:vehicle' node.name|slugify %}" >{{ node.name }}
+
+          <span class='tree-like-count'>({{node.like_count}} likes)</span>
+
+        </a>
+    
+        {% else %}
+    
+        <li><span class="caret">{{ node.name }}</span>
+    
+            {% endif %}
+    
+          {% endif %}
+          {% endif %}
+    
+          {% if not node.is_leaf_node %}
+          <ul class="nested">
+            {{ children }}
+          </ul>
+          {% endif %}
+        </li>
+    
+        {% endrecursetree %}
+        {% endif %}
+
+      </ul>
+    </div>
+
+    <div class='bottomborder'>
+      <img src="{% static 'bottomborder.png' %}">
+    </div>
+    
+    </aside>
+    
+    
+
+  {% block content %} 
+
+  <div class='content'>
+
+
+  <h3>A repository of tiny shelter builds.</h3>
+  <br>
+  <div class='tutorialflex1'>
+    <div class='tutorialflex1-child'>
+  <h5><i style='margin:20px'>...browse via 3 modes in sidebar</i></h5>
+  <h6>(you can minimize sidebar for more screen real estate)</h6>
+</div>
+<div class='tutorialflex1-child'>
+  <h5><i style='margin:20px'>...register to commment, message builders, and submit your own build posts</i></h5>
+</div>
+<div>
+  <h6 class='tutorialflex1-child intro-comment'>Stay tuned for updates. Need to communicate with site owner? Use the 'comments vehicle' or message me on my <a href="{% url 'website:profile' 1 %}">PROFILE</a>.</h6>
+
+</div>
+</div>
+
+  
+<br>
+<h4><i style='margin:20px'>To submit a build,</i></h4>
+<ul id='tutorial-uL'>
+  <li>Go to your garage and add a vehicle</li>
+  <li>Then add 'furniture' to the vehicle</li>
+  <li>Each furniture post will have a predominant functionality but you can categorize your build however you choose</li>
+      <p class='small'>For example, you could submit 'furniture' submissions for 'cooking area' and 'sleeping quarters' OR 
+        for 'memories of me with my van' and 'build progress - timelapse' 
+      </p>
+</ul>
+
+</div>
+
+
+  {% endblock content %} 
+
+      
+  </div>
+   
+
+
+ 
+ 
+
+
+
+
+    <script>
+      
+      $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+                event.preventDefault();
+                $(this).ekkoLightbox();
+            });
+
+
+    </script>
+
+
+
+
+
+
+
+</body>
+</html>

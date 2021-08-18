@@ -1,0 +1,35 @@
+<div class="border-0 border-start border-2 ps-2" id="{{comment.id}}">
+    <div class="mt-3">
+        <strong>Commenter: {{comment.name}}</strong> 
+        {% if  comment.parent.name%} to <strong>{{comment.parent.name}}</strong>{% endif %}
+    </div>
+    <div class="border p-2 rounded">
+            <p>{{comment.body}}</p>
+        {% if comment.image %}
+        <img src='{{comment.image.url}}' class='comment_image'>
+        {% endif %}
+        <button class="btn btn-primary btn-sm" onclick="handleReply({{comment.id}})">Reply</button>
+
+        <div id="reply-form-container-{{comment.id}}" style="display: none;">  
+        
+            <form method="post" action="{% url 'website:reply' %}" class="mt-3" enctype="multipart/form-data">
+                
+                {% csrf_token %}
+                <input type="hidden" name="vehicle_id" value="{{object.id}}">
+                <input type="hidden" name="parent" value="{{comment.id}}">
+                <input type="hidden" name="current_url" value="{{ request.build_absolute_uri}}">
+
+                {{comment_form.as_p}}
+                <div>
+                    <button type="button" onclick="handleCancel({{comment.id}})" class="btn btn-light border btn-sm">Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class='ml-4'>
+    {% for comment in comment.get_comments %}
+        {% include 'website/comments.html' with comment=comment %}
+    {% endfor %}
+    </div>
+</div>

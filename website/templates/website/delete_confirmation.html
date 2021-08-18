@@ -1,0 +1,55 @@
+
+{% extends 'base.html' %}
+
+{% load custom_tags %} 
+
+
+{% block content %}
+
+<div class='content'>
+<b>Confirm deletion of this entry?</b>
+<br>
+
+<br>
+<div style='max-width: fit-content; margin-left:40px'>
+    {% with object|classname as type %}
+    {% if type == "Vehicle_identification" %}
+    <h6 class="text-center text-muted">{{object.name}}</h6>
+
+
+    {% elif type == "Furniture" %}
+
+    <h6 class="text-center text-muted">Titled: {{object.room}} - located in {{object.vehicle.name}}</h6>
+
+
+    {% endif %}
+    {% endwith %}
+
+
+
+
+
+    <br>
+        <form method="post">{% csrf_token %}
+        <input class="btn-primary btn-lg btn-block" type="submit" value="Confirm">
+        <br>
+        </form>
+
+        {% with object|classname as type %}
+            {% if type == "Vehicle_identification" %}
+            
+            <a class="btn-secondary btn-lg btn-block text-center" style='color:white;margin-left:0px' href="{% url 'website:garage' user.username %}" role="button">Cancel</a>    
+
+            {% elif type == "Furniture" %}
+
+            <a class="btn-secondary btn-lg btn-block text-center" style='color:white;margin-left:0px' href="{% url 'website:list_furniture' object.vehicle.slug %}" role="button">Cancel</a>    
+
+
+            {% endif %}
+            {% endwith %}
+
+</div>
+
+</div>
+
+{% endblock content %}

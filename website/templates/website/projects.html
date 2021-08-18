@@ -1,0 +1,261 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load custom_tags %} 
+{% load static %}
+
+{% load mptt_tags %}
+{% block content %}
+
+<article class="content">
+<h3><span class='text-muted'>Build page:</span> {{object.name}} </h3>   
+
+
+
+
+<br>
+
+<span><i class="fas fa-scroll"></i> Basic stats</span>
+
+<div class='stats'>
+    <div>
+    <span><b>Vehicle base:</b></span>
+    <p class='indent' >{{object.project_base}}</p>
+    <span><b>Predominant build technique:</b></span>
+    <p class='indent'>{{object.build_techniques}}</p>
+    <span><b>Builder profile: </b></span>
+    <a href="{% url 'website:profile' object.owner %}">{{object.owner}}</a>
+    <br>
+    <br>
+    <span>
+        <span>Views: {{object.view_count}}</span>
+        <br>
+        <button type="button" onclick=vehlike({{object.pk}}) class="btn btn-default like" aria-label="Left Align">
+            <i class="fas fa-thumbs-up"></i>
+        </button>
+        <span class="mt-2" id="{{object.pk}}"> {{like_ref|get_item:object.pk}}</span>          
+        <span class='small ml-0' id={{object.pk}}-label></span>
+       
+
+
+    </span>
+
+</div>
+<div style="margin-right: 33%">
+    <span><b>Description:</b></span>
+    <p class='indent'>{{object.vehicle_description |safe}}</p>
+
+
+
+{% if user == object.owner %}
+<a href="{% url 'website:furnish' object.slug %}"> Add furniture to your vehicle</a>
+<br>
+<a  href="{% url 'website:editvehicle' object.slug %}">   Edit your vehicle</a>
+<br>
+<a href="{% url 'website:deletevehicle' object.slug %}">   Delete your vehicle</a>
+
+{% endif %}
+
+</div>
+
+</div>
+
+<br>
+
+<span class="titles">Exterior pictures</span>
+<button class='dropdown0'>
+    <img src="/static/down.png" class="dropdown-img0">
+</button>
+<br>
+<br>
+<div class="picture-section0">
+<div class='carousel'>
+    <button class="carousel__button carousel__button--left">
+        <img src="/static/PREV.png">
+    </button>
+    <div class="carousel__track">
+            {% for image in image_list %}
+
+                {% if forloop.first %}
+
+
+                <img class="carousel__image show" src="{{image.image.url}}" alt='{{image.annotation}}'>
+
+                {% else %}
+
+                <img class="carousel__image" src="{{image.image.url}}" alt='{{image.annotation}}'>
+
+                {%  endif %}
+
+
+            {% endfor %}
+    </div>
+    <button class="carousel__button carousel__button--right">
+        <img src="/static/NEXT.png">
+
+    </button>
+
+
+    <div class="carousel-caption">
+        <p id="image_annotation">{{image_list.0.annotation}}</p>
+    </div>
+
+
+</div>
+</div>
+
+
+{{furniture.list.0.images.0.annotation}}
+
+
+{% regroup furniture by room as f_list %} 
+
+{% for furniture in f_list %} 
+
+{% with outer_counter=forloop.counter %}
+
+{% if forloop.first %}
+
+
+<div id='group_count' style="display:none">{{f_list|length}}</div>
+
+{% endif%}
+
+
+<span class="titles">{{furniture.grouper}}</span>
+<button class='dropdown{{outer_counter}}'>
+    <img src="/static/down.png" class="dropdown-img{{outer_counter}}">
+</button>
+<br>
+<br>
+<div class="picture-section{{outer_counter}}">
+
+    <div style='margin-left:5%;'>
+
+
+        {% if user == furniture.list.0.builder %} 
+            <div class="float-right" style='margin-right:10%;'>
+                <span> <a  href="{% url 'website:editfurniture' furniture.list.0.id %}">Edit</a> 
+                <a href="{% url 'website:deletefurniture' furniture.list.0.pk %}">Delete</a>
+                </span>
+            </div>
+    {% endif %} 
+
+        <span><b>Predominant functionality: </b></span><span>{{furniture.list.0.functionality}}</span>
+        <br>
+        <span> Posted: {{ furniture.list.0.timestamp |date:"M Y" }} </span>
+        <br>
+        <span><b>Description: </b></span>
+        <p>{{furniture.list.0.description|safe}}</p>
+    </div>
+    
+        <div class='carousel'>
+            <button class="carousel__button{{outer_counter}} carousel__button--left{{outer_counter}}">
+                <img src="/static/PREV.png">
+            </button>
+            <div class="carousel__track{{outer_counter}}">
+                {% for image in furniture.list.0.images.all %} 
+        
+                        {% if forloop.first %}
+        
+        
+                        <img class="carousel__image show{{outer_counter}}" src="{{image.image.url}}" alt='{{image.annotation}}'>
+        
+                        {% else %}
+        
+                        <img class="carousel__image" src="{{image.image.url}}" alt='{{image.annotation}}'>
+        
+                        {%  endif %}
+        
+        
+                    {% endfor %}
+            </div>
+            <button class="carousel__button{{outer_counter}} carousel__button--right{{outer_counter}}">
+                <img src="/static/NEXT.png">
+        
+            </button>
+        
+            
+            <div class="carousel-caption">
+                <p id="image_annotation{{outer_counter}}">{{furniture.list.0.images.0.annotation}}</p>
+            </div>
+        
+        
+        </div>
+        
+            
+    </div>
+
+    
+
+{% endwith %}
+
+{% endfor %}
+
+
+<br>
+<hr>
+<h5 style='font-family:Homemade Apple,sans-serif;'>Add a comment</h5>
+<!-- <div class="holder clip">
+    <div class="circle circle1"></div>
+    <div class="circle circle2"></div>
+</div> -->
+
+
+
+<div id='scrollable_comments'>
+<!-- <h5>Add a comment</h5> -->
+
+    <div class='ml-5' style='background-color:rgba(255, 245, 216, 0.518);border-radius:1em; padding: 1em; max-width: 100%;'>
+        <form method="post" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ comment_form.as_p }}
+            
+            <button type="submit" class="btn btn-primary btn-sm">New post</button>
+        </form>
+    </div>
+    <br>
+        {% with comments.count as total_comments %}
+            <span class="mt-5 titles">
+                {{ total_comments }} comment{{ total_comments|pluralize }}
+            </span>
+            {% endwith %}
+                
+
+        {% if not object.comments.all %}
+            No comments yet
+        
+        {% else %}
+            {% for comment in object.get_comments %}
+                {% include 'website/comments.html' with comment=comment %}
+            {% endfor %}
+        {% endif %}
+
+
+</div>
+
+
+
+
+
+
+
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock content %}
+
+
+
+
+
+
