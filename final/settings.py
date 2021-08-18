@@ -41,7 +41,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
-# 'w80xg6^zapqjw0qg8!ctr&^atnfc@lp)o(=5+jd-h$1a5q(3t#'
 
 # REMOVED DUE TO SUBMISSION TO CS50 GRADING
 # SECRET_KEY = 'p8$l)@_om^a!iia6+e))ue@s&=__o4@xj#r)oa^@yu#mbx7@*i' 
@@ -160,7 +159,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'final/static'),
 )
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 #AUTH_USER_MODEL = "website.User"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
