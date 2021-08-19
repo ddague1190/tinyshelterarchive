@@ -198,7 +198,7 @@ class ProfileEditView(LoginRequiredMixin, UpdateView):
     def get_object(self):
         user = self.kwargs.get('user')
         if user == self.request.user.username:
-            return Profile.objects.get(user=user)
+            return Profile.objects.get(user=self.request.user)
         else:
             raise PermissionDenied
 
