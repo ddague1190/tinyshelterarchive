@@ -159,10 +159,15 @@
       <form action="{% url 'website:searchvehicles' %}" method="get">
         <select name="type" id="vehicle_type">
           <option value="none">select vehicle type...</option>
-          <option value="car">Car</option>
-          <option value="automobile">Automobile</option>
           <option value="van">Van</option>
+          <option value="truck">Truck</option>
+          <option value="automobile">Automobile</option>
           <option value="trailer">Trailer</option>
+          <option value="boat">Boat</option>
+          <option value="bicycle">Bicycle</option>
+          <option value="Immobile">Immobile</option>
+
+
         </select>
         <select name="technique" id="build_technique">
           <option value="none">select build technique...</option>

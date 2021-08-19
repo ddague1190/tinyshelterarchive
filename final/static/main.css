@@ -911,7 +911,7 @@ ul, #myUL {
 /* Remove margins and padding from the parent ul */
 .myUL {
   margin: 0em;
-  padding: 0;
+  padding: 1em;
   background-color: rgb(255, 234, 0);
   border-radius: 2em;
   display:none;
