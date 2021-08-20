@@ -14,6 +14,7 @@ urlpatterns = [
     path('editprofile/<user>', views.ProfileEditView.as_view(), name='editprofile'),
     path('vehicledeleterequest/<slug>', views.VehicleDeleteView.as_view(), name='deletevehicle'),
     path('furnituredeleterequest/<pk>', views.FurnitureDeleteView.as_view(), name='deletefurniture'),
+    path('accountdeleterequest/<user>', views.AccountDeleteView.as_view(), name='deleteaccount'),
     path('furniture/<slug>', views.ListFurnitureView.as_view(), name='list_furniture'),
     path('furnish/<slug>', views.FurnitureCreate.as_view(), name="furnish"),
     path('', views.index, name='index'),
@@ -35,6 +36,6 @@ urlpatterns = [
     path('searchvehicles', views.VehicleSearch.as_view(), name='searchvehicles'),
     path('vehlike', views.vehlike, name='vehlike'),
     path('comment/reply/', views.reply_page, name="reply")
-    
+
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

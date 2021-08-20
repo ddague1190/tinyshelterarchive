@@ -21,6 +21,7 @@ from django.contrib.messages import constants as messages
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
+# SECURE_SSL_REDIRECT = True
 
 
 MESSAGE_TAGS = {

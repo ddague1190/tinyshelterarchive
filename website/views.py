@@ -3,6 +3,7 @@
 from django.contrib.auth.models import Permission
 from django.core.exceptions import PermissionDenied
 from django.forms.models import modelform_factory
+from django.views.generic.base import RedirectView
 from multiselectfield.db.fields import add_metaclass
 from website.models import Furniture_pictures, Vehicle_identification, Furniture, Vehicle_pictures
 from django.http.response import HttpResponseRedirect, JsonResponse
@@ -125,6 +126,35 @@ def logout_request(request):
     messages.info(request, "Currently logged out")
     return redirect("website:index")
 
+class AccountDeleteView(LoginRequiredMixin, DeleteView):
+    login_url = 'login'
+    model = Furniture
+    success_message = "Successfully deleted account."
+    template_name = "website/delete_confirmation.html"
+    slug_for_redirect = None
+
+    def get_queryset(self):
+        qs = super(AccountDeleteView, self).get_queryset()
+        return qs.filter(owner=self.request.user)
+
+    def get_object(self):
+        user = self.kwargs.get('user')
+        if user == self.request.user.username:
+            return Profile.objects.get(user=self.request.user)
+        else:
+            raise PermissionDenied
+
+
+    def get_context_data(self, **kwargs):
+        data = super(AccountDeleteView, self).get_context_data(**kwargs)
+        data['projects'] = Project.objects.all()
+        return data
+
+    def get_success_url(self, **kwargs):
+        user = self.request.user
+        user.delete()
+        messages.info(self.request, "Your account was deleted :(")
+        return reverse('website:index')
 
 class ProfileView(LoginRequiredMixin, DetailView):
     login_url = 'login'
@@ -638,11 +668,11 @@ class VehicleSearch(ListView):
 
     def number_of_likes(self, queryset):
         number_of_likes_dictionary = {}
-        for item in queryset:
-            number_of_likes_dictionary[item.pk]=item.post.count()
+        if queryset:
+            for item in queryset:
+                number_of_likes_dictionary[item.pk]=item.post.count()
         return number_of_likes_dictionary
     
-
     def get_context_data(self, **kwargs):
         type = self.request.GET.get('type')
         technique = self.request.GET.get('technique')

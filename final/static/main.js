@@ -1,6 +1,5 @@
 
 
-
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -289,24 +288,18 @@ $(document).ready(function(){
     $('#function_selection').on('change', function() {
         console.log(this.value);
  
-        $(location).attr('href', '/furniturebytype/'+this.value)
-       // $.ajax({
-         //   type: 'GET',
-           // url: '/furniturebytype',
-            //data: {'type':this.value},
-            //success: function (response) {
-                // if not valid user, alert the user
-             
-              //  console.log(response);                 
-              
-           // },
-           // error: function (response) {
-             //   console.log(response)
-            })
-        //})
-    //})
+        $(location).attr('href', '/furniturebytype/'+this.value);
+
+            });
+  
+            $('#function_selection2').on('change', function() {
+                console.log(this.value);
+         
+                $(location).attr('href', '/furniturebytype/'+this.value);
         
-      
+                    });
+          
+              
         
          
         
@@ -434,42 +427,22 @@ $.each([0,1,2,3,4,5,6,7], function(i) {
         $('.picture-section'+[x]).toggle('slow');
         $('.dropdown-img'+[x]).toggleClass('dropdown-img-up');
     })
-})
+});
                   
-//unneeded
-// var cube = document.querySelector('.cube');
-// var tutorialCube = document.querySelector('.tutorialcube');
-// var currentClass = '';
-// const sideArray = ['front', 'back', 'right', 'left', 'top', 'bottom'];
-// var count = -1;
 
-// function changeSide() {
-//     side = sideArray[++count % sideArray.length];
-//     console.log(side)
-//     var showClass = 'show-' + side;
-//     if ( currentClass ) {
-//         cube.classList.remove( currentClass );
-//       }
-//       cube.classList.add( showClass );
-//       currentClass = showClass;
-  
-// // var checkedRadio = radioGroup.querySelector(':checked');
-// //   var showClass = 'show-' + checkedRadio.value;
-// //   if ( currentClass ) {
-// //     cube.classList.remove( currentClass );
-// //   }
-// //   cube.classList.add( showClass );
-// //   currentClass = showClass;
-// }
-// // set initial side
-// changeSide();
+$('#search-modal-button').on('click', function () {
+    console.log('modalopenclicked');
 
-// tutorialCube.addEventListener( 'click', changeSide );
+    $('#search-modal').toggle();
+});
 
+$('.close1').on('click', function () {
 
+    console.log('clicked');
 
+    $('#search-modal').toggle();
 
-
+});
 
 
 

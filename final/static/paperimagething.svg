@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 477.90329 295.83514" xmlns="http://www.w3.org/2000/svg">
+ <g transform="translate(-98.48 -405.85)" stroke-linecap="round" stroke-linejoin="round">
+  <g transform="translate(-10.725 -5.3624)">
+   <path d="m401.64 652.86 23.594 10.725 70.783-50.406-22.522-8.5798z" fill="#ececec" stroke="#ececec" stroke-width="2"/>
+   <path d="m420.95 575.65-78.291 46.116 63.276 30.029 71.856-49.334z" fill="#fff" stroke="#000" stroke-width="2"/>
+   <path d="m419.87 569.21-78.291 46.116 63.276 30.029 71.856-49.334z" fill="#fff" stroke="#000" stroke-width="2"/>
+   <path d="m419.87 560.1c-23.5 17.077-52.16 31.575-78.291 47.337l63.276 32.341 71.856-52.156z" fill="#fff" stroke="#000" stroke-width="2.0263"/>
+  </g>
+  <g transform="translate(-4.5501)" stroke-width="2">
+   <path d="m164.09 525.78 42.899 20.377 70.783-50.406-41.827-18.232z" fill="#ececec" stroke="#ececec"/>
+   <path d="m182.32 449.63-78.291 46.116 65.551 30.788 69.581-50.092z" fill="#fff" stroke="#000"/>
+   <path d="m182.86 443.2-78.291 46.116 63.276 30.029 71.856-49.334z" fill="#fff" stroke="#000"/>
+   <path d="m182.32 435.69-78.291 46.116 63.276 30.029 71.856-49.334z" fill="#fff" stroke="#000"/>
+   <path d="m182.86 428.18-78.291 46.116 63.276 30.029 71.856-49.334z" fill="#fff" stroke="#000"/>
+   <path d="m183.68 421.33-78.773 45.288 62.956 30.695 72.372-48.573z" fill="#fff" stroke="#000"/>
+   <path d="m184.22 414.35-78.773 45.288 62.956 30.695 72.372-48.573z" fill="#fff" stroke="#000"/>
+   <path d="m184.22 406.85c-90.71 50.264-63.976 35.731-79.531 44.53l63.714 31.453 72.372-48.573z" fill="#fff" stroke="#000"/>
+  </g>
+  <path d="m281.52 588.52 33.247 17.16 70.783-50.406-32.174-15.015z" fill="#ececec" stroke="#ececec" stroke-width="2"/>
+  <path d="m299.76 512.37-78.291 46.116 63.276 30.029 71.856-49.334z" fill="#fff" stroke="#000" stroke-width="2"/>
+  <path d="m299.76 505.4-78.291 46.116 63.276 30.029 71.856-49.334z" fill="#fff" stroke="#000" stroke-width="2"/>
+  <path d="m299.22 498.96-78.291 46.116 63.276 30.029 71.856-49.334z" fill="#fff" stroke="#000" stroke-width="2"/>
+  <path d="m299.22 492.48-76.297 46.934 62.023 30.05 69.989-50.155z" fill="#fff" stroke="#000" stroke-width="1.9876"/>
+  <path d="m299.62 485.67c-21.038 15.222-49.177 32.141-74.223 48.322 19.961 8.8427 40.557 17.199 58.406 27.662l72.372-48.573z" fill="#fff" stroke="#000" stroke-width="2"/>
+  <g transform="translate(-26.498 -17.604)" stroke-width="2">
+   <path d="m515.32 709.71 15.015 8.5798 71.542-51.165-14.701-5.6765z" fill="#ececec" stroke="#ececec"/>
+   <path d="m534.63 635.71-78.291 46.116 63.276 30.029 71.856-49.334z" fill="#fff" stroke="#000"/>
+  </g>
+  <path d="m505.99 611.13c-23.946 17.714-50.13 32.071-76.016 46.875l61.001 29.271 71.856-49.334z" fill="#fff" stroke="#000" stroke-width="2"/>
+ </g>
+</svg>

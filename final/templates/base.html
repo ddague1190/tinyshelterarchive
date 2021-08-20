@@ -17,6 +17,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+
+  <link rel="icon" type="image/png" href="{% static 'favicon.png' %}">
 <!-- This is ekko-lightbox -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" crossorigin="anonymous">
@@ -126,7 +128,11 @@
       <br>
 
         <div id='logo'>
-        <a style='text-decoration: none;color:rgb(227, 69, 69)' href="{% url 'website:index' %}"><h3 style='font-family:Major Mono Display'>Tiny Shelter Archive</h3></a>
+        <a style='text-decoration: none;color:rgb(87, 85, 85)' href="{% url 'website:index' %}"><h3 style='font-family:Major Mono Display'>TINY SHELTER ARCHIVE</h3></a>
+      </div>
+      <div id='smalllogo'>
+        <a style='text-decoration: none;color:rgb(87, 85, 85)' href="{% url 'website:index' %}"><h5 style='font-family:Major Mono Display;color:rgb(87, 85, 85;'>TINY SHELTER ARCHIVE</h5></a>
+        <hr>
       </div>
       <ul>
         {% if user.is_authenticated %}
@@ -140,7 +146,7 @@
 
               </li>
               <li>
-                                <a href="{% url 'website:logout' %}"></span> Logout?</a>
+                                <a href="{% url 'website:logout' %}"></span> Logout</a>
 
               </li>
         {% else %}
@@ -150,6 +156,8 @@
         {% endif %}
       </ul>
         </div>
+
+        <br>
       
 
     <div id='search'>
@@ -209,12 +217,82 @@
   
       </div>
 
+      <button id='search-modal-button'><h6 style='font-family:Major Mono Display;color:rgba(0, 0, 0, 0.397);'>Search options...</h6></button>
+
+      <div id='search-modal'>
+
+        <div id='search-modal-content'>
+          <span class="close1">&times;</span>
+
+        <div>
+          <h4>VEHICLE SEARCH</h4>
+
+
+
+
+        <form action="{% url 'website:searchvehicles' %}" method="get">
+          <select name="type" id="vehicle_type1">
+            <option value="none">select vehicle type...</option>
+            <option value="van">Van</option>
+            <option value="truck">Truck</option>
+            <option value="automobile">Automobile</option>
+            <option value="trailer">Trailer</option>
+            <option value="boat">Boat</option>
+            <option value="bicycle">Bicycle</option>
+            <option value="Immobile">Immobile</option>
+  
+  
+          </select>
+          <select name="technique" id="build_technique1">
+            <option value="none">select build technique...</option>
+            <option value="aluminum">Aluminum extrusions</option>
+            <option value="welding">Welding</option>
+            <option value="carpentry">Carpentry</option>
+            <option value="fiberglass">Fiberglass</option>
+            <option value="CNC">CNC</option>
+            <option value="foam">Foam</option>
+          </select>
+          <br>
+    
+          <input style='border-radius:0.25em;margin-bottom: 0.25em;' name="q" type="text" placeholder="searches all fields...">
+    <br>
+          <input type="submit" value="Search">
+        </form>
+      </div>
+    
+    <br>
+        
+        <div>
+          <h4>FURNITURE SEARCH</h4>
+
+          <select name='type' id="function_selection2">
+            <option value="none">select furniture function...</option>
+            <option value="Kitchen">Kitchen</option>
+            <option value="Bathroom">Bathroom</option>
+            <option value="Bedroom">Bedroom</option>
+            <option value="Garage">Garage</option>
+            <option value="Workspace">Workspace</option>
+            <option value="Utilities">Utilities</option>
+          </select>
+
+          </form>
+    
+      </div>
+
+      <object data="{% static 'paperimagething.svg' %}" width='100' hieght="50"></object>
+
+    </div>
+    
+    
+        </div>
+
 <br>
 
 
     
     <div id='treeview'>
 
+      <h6 id='alt-tree-title' style='font-family:Major Mono Display;color:rgba(0, 0, 0, 0.397);'>Entire collection</h6>
       <h4 id="tree-title"> ENTIRE COLLECTION</h4> 
       <button class='dropdown-tree'><img src="/static/down.png" class="dropdown-img-tree"></button>
 
@@ -280,9 +358,9 @@
   {% block content %} 
 
   <div class='content'>
+    <h3>A repository of tiny shelter builds.</h3>
 
-
-  <h3>A repository of tiny shelter builds.</h3>
+  <div id='archivetheme'>
   <br>
   <div class='tutorialflex1'>
     <div class='tutorialflex1-child'>
@@ -295,6 +373,7 @@
 <div>
   <h6 class='tutorialflex1-child intro-comment'>Stay tuned for updates. Need to communicate with the site owner? Go public through the 'comments vehicle' or PM me through my profile at profile/vanMan1.</h6>
 
+</div>
 </div>
 </div>
 
@@ -310,8 +389,7 @@
       </p>
 </ul>
 
-</div>
-
+  </div>
 
   {% endblock content %} 
 

@@ -119,7 +119,7 @@ class Vehicle_likes(models.Model):
 
 class Furniture(models.Model):
     room = models.CharField('Category', unique=True, max_length=100)
-    builder = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    builder = models.ForeignKey(User, null=True, on_delete=models.PROTECT)
     timestamp = models.DateTimeField(auto_now_add=True, null=True)
     vehicle = models.ForeignKey(Vehicle_identification, on_delete=models.CASCADE, related_name='furnitures')
     functionality = models.CharField('Predominant functionality', choices=Function_choices, max_length=20)
