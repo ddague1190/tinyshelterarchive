@@ -32,6 +32,7 @@
   height: 100vh;
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  /* grid-area:search1; */
 }
 
 #search-modal-content{
@@ -440,6 +441,7 @@ h6 .text-muted {
   position: absolute;
   top:0;
   left: 50%;
+  z-index: 2;
 
 }
 .garage-pic-section {
@@ -1027,7 +1029,6 @@ a:active .menu {
     grid-template-rows: auto;
     grid-template-areas:
     "menu"
-    "search"
     "treeview";
   }
 
@@ -1046,7 +1047,7 @@ a:active .menu {
 
 
   #search-modal-button{
-    display:block;
+    display:inline-block;
     background:transparent;
     border:none;
     justify-self:center;

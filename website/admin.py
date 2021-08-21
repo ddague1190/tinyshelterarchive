@@ -8,7 +8,7 @@ from django_mptt_admin.admin import DjangoMpttAdmin
 class ProjectAdmin(DjangoMpttAdmin):
     pass
 
-# Register your models here.
+# # Register your models here.
 admin.site.register(Furniture)
 admin.site.register(Vehicle_identification)
 admin.site.register(Furniture_pictures)

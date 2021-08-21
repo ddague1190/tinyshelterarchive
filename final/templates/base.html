@@ -135,6 +135,8 @@
         <hr>
       </div>
       <ul>
+
+
         {% if user.is_authenticated %}
      
         
@@ -154,6 +156,10 @@
                 <a href="{% url 'website:login' %}">Login</a>
               </li>
         {% endif %}
+
+        <li>
+          <button id='search-modal-button'>Search options</button>
+        </li>
       </ul>
         </div>
 
@@ -217,7 +223,6 @@
   
       </div>
 
-      <button id='search-modal-button'><h6 style='font-family:Major Mono Display;color:rgba(0, 0, 0, 0.397);'>Search options...</h6></button>
 
       <div id='search-modal'>
 
@@ -279,7 +284,6 @@
     
       </div>
 
-      <object data="{% static 'paperimagething.svg' %}" width='100' hieght="50"></object>
 
     </div>
     
@@ -291,6 +295,8 @@
 
     
     <div id='treeview'>
+
+
 
       <h6 id='alt-tree-title' style='font-family:Major Mono Display;color:rgba(0, 0, 0, 0.397);'>Entire collection</h6>
       <h4 id="tree-title"> ENTIRE COLLECTION</h4> 
