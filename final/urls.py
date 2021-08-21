@@ -61,7 +61,7 @@ admin_site.register(Comment)
 
 
 urlpatterns = [
-    path('901252112/', admin.site.urls),
+    path('901252112/', admin_site.urls),
     path('', include('website.urls')),
     #path('tinymce/', include('tinymce.urls')),
     #url(r'^messages/', include('postman.urls', namespace='postman')),
