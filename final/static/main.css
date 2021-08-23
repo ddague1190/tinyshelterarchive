@@ -683,8 +683,8 @@ h6 .text-muted {
 .carousel__button7 {
 
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 50%; 
+  transform: translateY(-50%); 
   border: 0;
   background: transparent;
   cursor: pointer;
@@ -699,7 +699,7 @@ h6 .text-muted {
 .carousel__button--left6,
 .carousel__button--left7 {
 
-  left: -25px;
+  left: -35px;
 
 }
 .carousel__button--left img,
@@ -733,7 +733,7 @@ h6 .text-muted {
 .carousel__button--right6,
 .carousel__button--right7 {
 
-  right: -20px;
+  right: -30px;
 
 }
 
