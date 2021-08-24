@@ -135,7 +135,7 @@
             </div>
 
 
-            {% for image in item.images.all %} 
+            {% for image in item.images.all|first_five %} 
             <div class='furniture-pic-container'> <img class='furniture-pic' src="{{image.image.url}}"></div>
             {% endfor %}
 
@@ -199,7 +199,7 @@
             </div>
 
 
-            {% for image in item.images.all %} 
+            {% for image in item.images.all|first_five %} 
             <div class='furniture-pic-container'> <img class='furniture-pic' src="{{image.image.url}}"></div>
             {% endfor %}
 
@@ -262,7 +262,7 @@
             </div>
 
 
-            {% for image in item.images.all %} 
+            {% for image in item.images.all|first_five %} 
             <div class='furniture-pic-container'> <img class='furniture-pic' src="{{image.image.url}}"></div>
             {% endfor %}
 
@@ -327,7 +327,7 @@
             </div>
 
 
-            {% for image in item.images.all %} 
+            {% for image in item.images.all|first_five %} 
             <div class='furniture-pic-container'> <img class='furniture-pic' src="{{image.image.url}}"></div>
             {% endfor %}
 

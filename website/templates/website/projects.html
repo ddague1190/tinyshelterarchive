@@ -62,12 +62,24 @@
 <br>
 
 <span class="titles">Exterior pictures</span>
+
 <button class='dropdown0'>
     <img src="/static/down.png" class="dropdown-img0">
 </button>
 <br>
 <br>
 <div class="picture-section0">
+    {% for image in image_list %} 
+{% if forloop.first %}
+<a href="{{image.image.url}}" data-toggle="lightbox" data-gallery="{{object.id}}" class="" data-footer="{{image.annotation}}">
+   <span>Pop-up slideshow</span>
+</a>
+{% else %}
+<div data-toggle="lightbox" data-gallery="{{object.id}}" data-remote="{{image.image.url}}" data-footer="{{image.annotation}}"></div>
+
+{% endif %}
+
+{% endfor %}
 <div class='carousel'>
     <button class="carousel__button carousel__button--left">
         <img src="/static/PREV.png">
@@ -122,12 +134,24 @@
 
 
 <span class="titles">{{furniture.grouper}}</span>
-<button class='dropdown{{outer_counter}}'>
+
+<button style='display:inline-block';  class='dropdown{{outer_counter}}'>
     <img src="/static/down.png" class="dropdown-img{{outer_counter}}">
 </button>
 <br>
 <br>
 <div class="picture-section{{outer_counter}}">
+    {% for image in furniture.list.0.images.all %} 
+    {% if forloop.first %}
+    <a href="{{image.image.url}}" data-toggle="lightbox" data-gallery="{{furniture.grouper}}" class="" data-footer="{{image.annotation}}">
+       <span>Pop-up slideshow</span>
+    </a>
+    {% else %}
+    <div data-toggle="lightbox" data-gallery="{{furniture.grouper}}" data-remote="{{image.image.url}}" data-footer="{{image.annotation}}"></div>
+    
+    {% endif %}
+    
+    {% endfor %}
 
     <div style='margin-left:5%;'>
 
@@ -145,7 +169,7 @@
         <span> Posted: {{ furniture.list.0.timestamp |date:"M Y" }} </span>
         <br>
         <span><b>Description: </b></span>
-        <p>{{furniture.list.0.description|safe}}</p>
+        <p id='description'>{{furniture.list.0.description|safe}}</p>
     </div>
     
         <div class='carousel'>
