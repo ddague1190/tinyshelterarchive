@@ -118,9 +118,11 @@ load static %} {% load mptt_tags %} {% block content %}
     </div>
   </div>
 
-  {{furniture.list.0.images.0.annotation}} {% regroup furniture by room as
-  f_list %} {% for furniture in f_list %} {% with outer_counter=forloop.counter
-  %} {% if forloop.first %}
+  {{furniture.list.0.images.0.annotation}} 
+  {% regroup furniture by room as f_list %}
+   {% for furniture in f_list %} 
+   {% with outer_counter=forloop.counter%} 
+   {% if forloop.first %}
 
   <div id="group_count" style="display: none">{{f_list|length}}</div>
 
@@ -134,7 +136,8 @@ load static %} {% load mptt_tags %} {% block content %}
   <br />
   <br />
   <div class="picture-section{{outer_counter}}">
-    {% for image in furniture.list.0.images.all %} {% if forloop.first %}
+    {% for image in furniture.list.0.images.all %} 
+    {% if forloop.first %}
     <a
       href="{{image.image.url}}"
       data-toggle="lightbox"
@@ -152,7 +155,8 @@ load static %} {% load mptt_tags %} {% block content %}
       data-footer="{{image.annotation}}"
     ></div>
 
-    {% endif %} {% endfor %}
+    {% endif %} 
+    {% endfor %}
 
     <div style="margin-left: 5%">
       {% if user == furniture.list.0.builder %}
@@ -184,7 +188,8 @@ load static %} {% load mptt_tags %} {% block content %}
         <img src="/static/PREV.png" />
       </button>
       <div class="carousel__track{{outer_counter}}">
-        {% for image in furniture.list.0.images.all %} {% if forloop.first %}
+        {% for image in furniture.list.0.images.all %} 
+        {% if forloop.first %}
 
         <img
           class="carousel__image show{{outer_counter}}"
@@ -216,7 +221,8 @@ load static %} {% load mptt_tags %} {% block content %}
     </div>
   </div>
 
-  {% endwith %} {% endfor %}
+  {% endwith %} 
+  {% endfor %}
 
   <br />
   <hr />
@@ -239,7 +245,8 @@ load static %} {% load mptt_tags %} {% block content %}
       "
     >
       <form method="post" action="" enctype="multipart/form-data">
-        {% csrf_token %} {{ comment_form.as_p }}
+        {% csrf_token %} 
+        {{ comment_form.as_p }}
 
         <button type="submit" class="btn btn-primary btn-sm">New post</button>
       </form>
@@ -249,9 +256,14 @@ load static %} {% load mptt_tags %} {% block content %}
     <span class="mt-5 titles">
       {{ total_comments }} comment{{ total_comments|pluralize }}
     </span>
-    {% endwith %} {% if not object.comments.all %} No comments yet {% else %} {%
-    for comment in object.get_comments %} {% include 'website/comments.html'
-    with comment=comment %} {% endfor %} {% endif %}
+    {% endwith %} 
+    {% if not object.comments.all %}
+     No comments yet 
+     {% else %} 
+     {% for comment in object.get_comments %} 
+     {% include 'website/comments.html' with comment=comment %} 
+     {% endfor %} 
+     {% endif %}
   </div>
 </article>
 
