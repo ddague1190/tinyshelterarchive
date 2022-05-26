@@ -1,6 +1,6 @@
 # Tiny shelter archive
  
-The end goal of this project is to provide a repository for van dwellers, nomad-houseless types, and all manner of rubber tramps a way to capture their shelter builds. I intend to fully develop this site as it is a subject very dear to me. I ask that no details of this project be shared - this readme is for your eyes only. 
+The end goal of this project is to provide a repository for van dwellers, nomad-houseless types, and all manner of rubber tramps a way to capture their shelter builds.
 
 ## Installation
 
